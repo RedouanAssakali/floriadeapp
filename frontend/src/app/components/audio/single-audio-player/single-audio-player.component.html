@@ -1,0 +1,19 @@
+<div class="music-container" id="music-container">
+  <div class="music-info">
+    <h4 id="title"></h4>
+    <div class="progress-container" (click)="setProgress" id="progress-container">
+      <div class="progress" id="progress"></div>
+    </div>
+  </div>
+
+  <audio src="{{audioUrl}}" id="audio" ></audio>
+
+  <div class="img-container">
+    <img src="{{coverUrl}}" alt="music-cover" id="cover" />
+  </div>
+  <div class="navigation">
+    <button id="play"  (click)="clickPlay()" class="action-btn action-btn-big">
+      <fa-icon [icon]="playOrPause"></fa-icon>
+    </button>
+  </div>
+</div>
