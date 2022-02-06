@@ -1,7 +1,7 @@
-<div class="music-container" id="music-container">
+<div class="{{musicContainerClasses}}" id="music-container">
   <div class="music-info">
-    <h4 id="title"></h4>
-    <div class="progress-container" (click)="setProgress" id="progress-container">
+    <h4 id="title">{{title}}</h4>
+    <div class="progress-container" (click)="setProgress(event)" id="progress-container">
       <div class="progress" id="progress"></div>
     </div>
   </div>
@@ -17,3 +17,32 @@
     </button>
   </div>
 </div>
+<!--<div id="app-cover">-->
+
+<!--  <div id="player">-->
+<!--    <div id="player-track">-->
+<!--      <div id="album-name"></div>-->
+<!--      <div id="track-name"></div>-->
+<!--      <div id="track-time">-->
+<!--        <div id="current-time"></div>-->
+<!--        <div id="track-length"></div>-->
+<!--      </div>-->
+<!--      <div id="s-area">-->
+<!--        <div id="ins-time"></div>-->
+<!--        <div id="s-hover"></div>-->
+<!--        <div id="seek-bar"></div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div id="player-content">-->
+<!--      <div id="album-art">-->
+<!--        <img src="{{coverUrl}}" alt="music-cover" id="cover" />-->
+<!--        <div id="buffer-box">Buffering ...</div>-->
+<!--      </div>-->
+<!--      <div id="player-controls">-->
+<!--        <button id="play"  (click)="clickPlay()" class="action-btn action-btn-big">-->
+<!--        <fa-icon [icon]="playOrPause"></fa-icon>-->
+<!--        </button>-->
+<!--      </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->

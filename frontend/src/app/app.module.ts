@@ -11,6 +11,7 @@ import { PoiContentComponent } from './components/poi/poi-content/poi-content.co
 import { PoiPageComponent } from './components/poi/poi-page/poi-page.component';
 import { PoiPlantsComponent } from './components/poi/poi-plants/poi-plants.component';
 import { SingleAudioPlayerComponent } from './components/audio/single-audio-player/single-audio-player.component';
+import { ChooseLanguageComponent } from './components/home/choose-language/choose-language.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { SingleAudioPlayerComponent } from './components/audio/single-audio-play
     PoiContentComponent,
     PoiPageComponent,
     PoiPlantsComponent,
-    SingleAudioPlayerComponent
+    SingleAudioPlayerComponent,
+    ChooseLanguageComponent
   ],
   imports: [
     BrowserModule,

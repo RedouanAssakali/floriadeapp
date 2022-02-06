@@ -1,42 +1,41 @@
 import { Component, OnInit } from '@angular/core';
 import {faStepForward, faPlay, faPause, IconDefinition} from "@fortawesome/free-solid-svg-icons";
+import {ClassPropertyName} from "@angular/compiler-cli/src/ngtsc/metadata";
 @Component({
   selector: 'app-single-audio-player',
   templateUrl: './single-audio-player.component.html',
   styleUrls: ['./single-audio-player.component.css']
 })
 export class SingleAudioPlayerComponent implements OnInit {
-  faStepForward = faStepForward;
   faPlay = faPlay;
   faPause = faPause;
   playOrPause: IconDefinition = faPlay;
-
-  musicContainer = document.getElementById('music-container');
+  event = Event;
+  musicContainer = document.getElementById('music-container') as HTMLDivElement;
   audio = new Audio();
   playBtn = document.getElementById('play');
-    // document.getElementById('audio') as HTMLAudioElement;
-  progress = document.getElementById('progress');
-  progressContainer = document.getElementById('progress-container');
-  title = document.getElementById('title');
+  // document.getElementById('audio') as HTMLAudioElement;
+  progress = document.getElementById('progress') as HTMLProgressElement;
+  progressContainer = document.getElementById('progress-container') as HTMLProgressElement;
+  title: string;
   cover = document.getElementById('cover') as HTMLImageElement;
   currTime = document.querySelector('#currTime');
   durTime = document.querySelector('#durTime');
- audioUrl: string;
+  audioUrl: string;
   coverUrl: string;
 // Song titles
   songs = ['ukulele'];
 // Keep track of song
   songIndex = 2;
-
+  musicContainerClasses: string = "music-container";
   constructor() { }
   ngOnInit(): void {
 
-this.audio = document.getElementById('audio') as HTMLAudioElement;
+    this.audio = document.getElementById('audio') as HTMLAudioElement;
 
 
 // Initially load song details into DOM
     this.loadSong((this.songs)[this.songIndex]);
-
 
 
 
@@ -47,10 +46,11 @@ this.audio = document.getElementById('audio') as HTMLAudioElement;
 
 // Time/song update
 
-    this.audio.ontimeupdate = this.updateProgress;
+    // this.audio.ontimeupdate = this.updateProgress;
+
 
 // // Click on progress bar
-  this.progressContainer.addEventListener('click', this.setProgress);
+//   this.progressContainer.addEventListener('click', this.setProgress);
 //
 // // Time of song
 //     this.audio.addEventListener('timeupdate',this.DurTime);
@@ -59,16 +59,16 @@ this.audio = document.getElementById('audio') as HTMLAudioElement;
 
 
   // Update song details
-   loadSong(song: string) {
-    // this.title = song;
-    this.audioUrl = `assets/audio/music-player_music_ukulele.mp3`;
-    this.coverUrl = `assets/images/ukulele.jpeg`;
+  loadSong(song: string) {
+    this.title = "Mother earth about Africa...";
+    this.audioUrl = `assets/audio/motherEarth.mp3`;
+    this.coverUrl = `assets/images/motherEarth.jpg`;
   }
 
 // Play song
   playSong() {
-   this.playOrPause = this.faPause;
-
+    this.playOrPause = this.faPause;
+    this.musicContainerClasses = "music-container play";
     this.audio.play();
   }
 
@@ -83,7 +83,9 @@ this.audio = document.getElementById('audio') as HTMLAudioElement;
 // Pause song
   pauseSong() {
 
-this.playOrPause = this.faPlay;
+    this.playOrPause = this.faPlay;
+    this.musicContainerClasses = "music-container";
+
     this.audio.pause();
   }
 
@@ -92,15 +94,15 @@ this.playOrPause = this.faPlay;
 
 
 // Update progress bar
-    updateProgress = (e: any): Event =>  {
-    const { duration, currentTime } = e.Event.target;
-    const progressPercent = (currentTime / duration) * 100;
-    this.progress.style.width = `${progressPercent}%`;
-    return e;
-  }
+//     updateProgress = (e: any): Event =>  {
+//     const { duration, currentTime } = e.getGlobalEventTarget();
+//     const progressPercent = (currentTime / duration) * 100;
+//     this.progress.style.width = `${progressPercent}%`;
+//     return e;
+//   }
 
 // Set progress bar
- setProgress(e: any) {
+  setProgress(e: any) {
     const width = e.clientWidth;
     const clickX = e.offsetX;
     const duration = this.audio.duration;
@@ -109,7 +111,7 @@ this.playOrPause = this.faPlay;
   }
 
 //get duration & currentTime for Time of song
-   DurTime(e: any) {
+  DurTime(e: any) {
     const {duration,currentTime} =  e.Event.target;
     var sec;
     var sec_d;
@@ -117,7 +119,7 @@ this.playOrPause = this.faPlay;
     // define minutes currentTime
     let min: string | number = (currentTime==null)? 0:
       Math.floor(currentTime/60);
-     min = min <10 ? '0'+min:min;
+    min = min <10 ? '0'+min:min;
 
     // define seconds currentTime
     function get_sec (currentTime: any, x:any) {
