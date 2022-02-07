@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { faQrcode } from '@fortawesome/free-solid-svg-icons';
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {QrScannerComponent} from "../../qrCode/qr-scanner/qr-scanner.component";
 
 @Component({
   selector: 'app-footer',
@@ -8,9 +10,12 @@ import { faQrcode } from '@fortawesome/free-solid-svg-icons';
 })
 export class FooterComponent implements OnInit {
   faQrcode  = faQrcode;
-  constructor() { }
+  constructor(private modalService: NgbModal) { }
 
   ngOnInit(): void {
   }
 
+  openScanner() {
+    this.modalService.open(QrScannerComponent)
+  }
 }

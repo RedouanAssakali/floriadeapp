@@ -12,6 +12,11 @@ import { PoiPageComponent } from './components/poi/poi-page/poi-page.component';
 import { PoiPlantsComponent } from './components/poi/poi-plants/poi-plants.component';
 import { SingleAudioPlayerComponent } from './components/audio/single-audio-player/single-audio-player.component';
 import { ChooseLanguageComponent } from './components/home/choose-language/choose-language.component';
+import {ZXingScannerModule} from "@zxing/ngx-scanner";
+import { QrScannerComponent } from './components/qrCode/qr-scanner/qr-scanner.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { IntroductionComponent } from './components/home/introduction/introduction.component';
+import { TourPageComponent } from './components/tour/tour-page/tour-page.component';
 
 @NgModule({
   declarations: [
@@ -23,12 +28,17 @@ import { ChooseLanguageComponent } from './components/home/choose-language/choos
     PoiPageComponent,
     PoiPlantsComponent,
     SingleAudioPlayerComponent,
-    ChooseLanguageComponent
+    ChooseLanguageComponent,
+    QrScannerComponent,
+    IntroductionComponent,
+    TourPageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    ZXingScannerModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

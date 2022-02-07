@@ -1,1 +1,10 @@
-<app-choose-language></app-choose-language>
+<app-choose-language (lng)="choseLng = true" *ngIf="!choseLng"></app-choose-language>
+
+<div *ngIf="choseLng">
+
+  <app-introduction ></app-introduction>
+  <div class="alert alert-success" role="alert"><b>The Garden of Peace prepared an audio-tour for you
+  </b> </div>
+  <button type="button" routerLink="tour" class="btn btn-success">Start audio-tour </button>
+
+</div>

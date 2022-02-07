@@ -1,5 +1,9 @@
-<nav class="navbar fixed-bottom navbar-light bg-light">
+<nav class="footer fixed-bottom navbar-light bg-light">
 
-<fa-icon class="scanIcon"  [icon]="faQrcode"></fa-icon>
+  <ul class="navbar-nav">
+    <li class="nav-item text-center w-100">
+      <button type="button"  (click)="openScanner()" class="btn btn-success"><fa-icon class="scanIcon"  [icon]="faQrcode"></fa-icon>
+      </button>   </li>
+  </ul>
 
 </nav>

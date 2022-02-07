@@ -1,0 +1,10 @@
+<div class="scanModal">
+<!--<zxing-scanner (scanSuccess)="onCodeResult($event)"></zxing-scanner>-->
+  <zxing-scanner [torch]="torchEnabled" [device]="deviceCurrent" (deviceChange)="onDeviceChange($event)" (scanSuccess)="onCodeResult($event)"
+                 [formats]="formatsEnabled" [tryHarder]="tryHarder"
+                 (camerasFound)="onCamerasFound($event)" (torchCompatible)="onTorchCompatible($event)"></zxing-scanner>
+<p>
+
+  <button type="button"(click)="closeModal()"  routerLink="poi" *ngIf="qrResultString!=null" class="btn btn-success"><strong>{{qrResultString}}</strong></button>
+</p>
+</div>

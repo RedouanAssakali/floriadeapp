@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <title>Garden of Peace Tour</title>
+    <style>
+        .navbar {
+            background-color: #2f4c91;
+            color: aliceblue;
+        }
+        a{
+            color: white;
+        }
+        .navbar-toggler-icon{
+            color: white;
+        }
+
+
+        /* Resets */
+        hr {
+            margin-left: 0;
+            max-width: 40px;
+        }
+
+        /* Jumbotron (hero) */
+        .jumbotron {
+            position: relative;
+            background: url("https://audiodiary-fe-team1-staging.herokuapp.com/ewa-diary.png") no-repeat bottom center/cover;
+        }
+        .jumbotron:before {
+            position: absolute;
+            content: "";
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        .jumbotron .container {
+            padding: 75px 0;
+        }
+        .jumbotron h1,
+        .jumbotron .lead {
+            color: #fff;
+        }
+
+        /* Bustom button */
+        .btn-primary {
+            background: #1096fc;
+            border: 0;
+        }
+        .btn-primary:hover {
+            background: #0384e5;
+        }
+
+        /* Features */
+        .sec-features .row:nth-of-type(n + 2) {
+            margin-top: 160px;
+        }
+        .sec-features .row:last-of-type {
+            margin-bottom: 160px;
+        }
+        .sec-features .feature-icon {
+            max-width: 150px;
+        }
+
+        /* Testimonials */
+        .sec-testimonials {
+            padding-top: 128px;
+            padding-bottom: 128px;
+        }
+
+        /* Carousel */
+        .carousel-indicators {
+            bottom: -30px;
+        }
+        .carousel-indicators li {
+            background: rgba(33, 33, 33, 0.1);
+        }
+        .carousel-indicators li:focus, .carousel-indicators li:hover {
+            background: rgba(33, 33, 33, 0.5);
+        }
+        .carousel-indicators .active {
+            background: rgba(33, 33, 33, 0.75);
+        }
+
+        .carousel-control-next,
+        .carousel-control-prev {
+            color: #212121;
+        }
+        .carousel-control-next:focus, .carousel-control-next:hover,
+        .carousel-control-prev:focus,
+        .carousel-control-prev:hover {
+            color: #111;
+        }
+
+        /* Footer */
+        .footer {
+            padding-top: 24px;
+            padding-bottom: 24px;
+            background: #212121;
+        }
+        .footer li:nth-of-type(n + 2) {
+            margin-left: 8px;
+        }
+        .footer a {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.5);
+            transition: color 0.235s ease-in-out;
+        }
+        .footer a:focus, .footer a:hover {
+            color: rgba(255, 255, 255, 0.25);
+        }
+
+    </style>
+</head>
+<body>
+
+<nav id="navbar" class="navbar navbar-expand-lg navbar navbar-light ">
+    <a class="navbar-brand" href="#">
+        <img src="https://gardenofpeace.online/uploads/logo_bg_7843659a19.svg" width="70" >
+    </a>
+
+</nav>
+
+
+<div class="wrapper">
+    <section class="hero">
+        <header>
+            <div class="container">
+
+            </div>
+        </header>
+
+        <div class="jumbotron jumbotron-fluid mb-0">
+            <div class="container">
+                <div class="row justify-content-center text-center">
+                    <div class="col-md-10 col-lg-6">
+                        <h1>Garden of Peace Tour</h1>
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <p class="lead">
+        <p>In order to allow you to best travel the aisles of the Garden of Peace, we invite you to use the audiotours available in Dutch, English, French or Spanish.</p>
+        <a class="btn btn-primary btn-lg m-2" href="https://www.gardenofpeace.online" role="button">Go to the garden of website!</a>
+        </p>
+    </section>
+</div>
+
+</body>
+</html>

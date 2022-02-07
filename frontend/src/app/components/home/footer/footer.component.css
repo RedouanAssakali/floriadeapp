@@ -1,16 +1,16 @@
-
+.footer{
+  align-items: center;
+}
 .scanIcon{
 
-  position: center;
-  margin-left: 170px;
-
-  display:inline-block;
   font-size: 40px;
   line-height: 50px;
-  color: #e23648;
+  color: white;
+  border: none;
   width: 50px;
   height: 50px;
   text-align: center;
   vertical-align: bottom;
 
 }
+
