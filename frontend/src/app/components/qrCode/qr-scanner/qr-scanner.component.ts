@@ -3,8 +3,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import {BarcodeFormat} from "@zxing/browser";
 import {BehaviorSubject} from "rxjs";
 
-class MatDialog {
-}
+
 
 @Component({
   selector: 'app-qr-scanner',
