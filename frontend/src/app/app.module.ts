@@ -17,6 +17,12 @@ import { QrScannerComponent } from './components/qrCode/qr-scanner/qr-scanner.co
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { IntroductionComponent } from './components/home/introduction/introduction.component';
 import { TourPageComponent } from './components/tour/tour-page/tour-page.component';
+import { LoginComponent } from './components/admin/forms/login/login.component';
+import {ReactiveFormsModule} from "@angular/forms";
+import { AlertComponent } from './components/admin/alert/alert.component';
+import {HttpClientModule} from "@angular/common/http";
+import { AdminpageComponent } from './components/admin/adminpage/adminpage.component';
+import { PoisComponent } from './components/admin/pois/pois.component';
 
 @NgModule({
   declarations: [
@@ -31,14 +37,22 @@ import { TourPageComponent } from './components/tour/tour-page/tour-page.compone
     ChooseLanguageComponent,
     QrScannerComponent,
     IntroductionComponent,
-    TourPageComponent
+    TourPageComponent,
+    LoginComponent,
+    AlertComponent,
+    AdminpageComponent,
+    PoisComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FontAwesomeModule,
     ZXingScannerModule,
-    NgbModule
+    NgbModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

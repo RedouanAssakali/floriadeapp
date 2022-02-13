@@ -1,9 +1,9 @@
 <nav class="footer fixed-bottom navbar-light bg-light">
 
-  <ul class="navbar-nav">
-    <li class="nav-item text-center w-100">
-      <button type="button"  (click)="openScanner()" class="btn btn-success"><fa-icon class="scanIcon"  [icon]="faQrcode"></fa-icon>
-      </button>   </li>
+  <ul class="navbar-nav" >
+    <li *ngIf="router.url !=='/admin' && router.url !=='/login' " class="nav-item text-center w-100">
+      <button type="button"   (click)="openScanner()" class="btn btn-success"><fa-icon class="scanIcon"  [icon]="faQrcode"></fa-icon>
+      </button>  </li>
   </ul>
 
 </nav>
