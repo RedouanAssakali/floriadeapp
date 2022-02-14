@@ -1,0 +1,32 @@
+
+<div class="sidebar d-flex flex-column flex-shrink-0 p-3 text-white bg-dark">
+  <a  class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+    <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+    <span class="fs-4">Admin: {{admin.name}}</span>
+  </a>
+  <hr>
+  <ul class="pageList nav nav-pills flex-column mb-auto">
+
+
+    <li class="nav-item">
+      <a class="nav-link " aria-current="page">
+        Home
+      </a>
+    </li>
+    <li>
+      <a (click)="clickPois()" class="nav-link ">
+        POI's
+      </a>
+    </li>
+  </ul>
+  <hr>
+
+  <button (click)="signout()"  type="button" class="btn btn-danger"> <strong>Log Out</strong></button>
+
+</div>
+
+<div class="page">
+  <h1>Garden of peace manager</h1>
+  <div class="item">
+  </div>
+</div>

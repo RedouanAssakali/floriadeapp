@@ -10,14 +10,14 @@ import {User} from "../../../models/user";
 })
 export class AdminpageComponent implements OnInit {
 
-  constructor(private accountService: AccountService) { }
-  admin:User
+  constructor() { }
 
   ngOnInit(): void {
 
-    this.admin = this.accountService.userValue.user
   }
-  signout() {
-    this.accountService.logout();
-  }
+
+
+
+
+
 }

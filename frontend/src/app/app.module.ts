@@ -23,6 +23,7 @@ import { AlertComponent } from './components/admin/alert/alert.component';
 import {HttpClientModule} from "@angular/common/http";
 import { AdminpageComponent } from './components/admin/adminpage/adminpage.component';
 import { PoisComponent } from './components/admin/pois/pois.component';
+import { SidebarComponent } from './components/admin/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { PoisComponent } from './components/admin/pois/pois.component';
     AlertComponent,
     AdminpageComponent,
     PoisComponent,
+    SidebarComponent,
 
   ],
   imports: [

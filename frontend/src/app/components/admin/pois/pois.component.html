@@ -1,1 +1,19 @@
-<p>pois works!</p>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">name</th>
+    <th scope="col">language</th>
+    <th scope="col">title</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let poi of pois; index as i">
+    <th scope="row">{{ i + 1 }}</th>
+    <td>{{poi.name}}</td>
+    <td>{{ poi.language}}</td>
+    <td>{{ poi.title}}</td>
+  </tr>
+  </tbody>
+</table>

@@ -11,7 +11,6 @@ import {environment} from "../../environments/environment";
 export class AccountService {
   private userSubject: BehaviorSubject<User>;
   public user: Observable<User>;
-  private currentUser:User;
   constructor(
     private router: Router,
     private http: HttpClient
