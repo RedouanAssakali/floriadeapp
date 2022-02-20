@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Poi;
+
+use App\Models\PoiContent;
 use Illuminate\Http\Request;
 
-class PoiController extends Controller
+class PoiContentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,8 +14,8 @@ class PoiController extends Controller
      */
     public function index()
     {
-        return Poi::all();
-
+        //
+        return PoiContent::all();
     }
 
     /**
@@ -26,11 +27,12 @@ class PoiController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'lat'=> 'required',
-            'long'=> 'required',
+            'poi_id' => 'required',
+            'language'=> 'required',
+            'title'=> 'required',
+            'body'=> 'required',
         ]);
-        return Poi::create($request->all());
+        return PoiContent::create($request->all());
     }
 
     /**
@@ -39,9 +41,11 @@ class PoiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(int $poi_id, string $lang)
     {
-        return Poi::find($id);
+        return PoiContent::where('poi_id','=',$poi_id)
+            ->where('language','=',$lang)
+            ->get();
     }
 
     /**
@@ -53,20 +57,17 @@ class PoiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $poi = Poi::find($id);
-        $poi->update($request->all());
-        return $poi;
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return int
+     * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        return Poi::destroy($id);
+        //
     }
-
 }

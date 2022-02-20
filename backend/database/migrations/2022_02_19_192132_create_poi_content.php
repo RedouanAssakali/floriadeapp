@@ -13,14 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('pois', function (Blueprint $table) {
+
+        Schema::create('poi_content', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->foreignId('poi_id')->constrained('pois')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->string('language');
             $table->string('title');
-            $table->text('content');
-            $table->string('image');
-            $table->string('audio');
+            $table->text('body');
             $table->timestamps();
         });
     }
@@ -32,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pois');
+        Schema::dropIfExists('poi_content');
     }
 };

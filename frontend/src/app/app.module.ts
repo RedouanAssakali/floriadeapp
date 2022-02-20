@@ -18,12 +18,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { IntroductionComponent } from './components/home/introduction/introduction.component';
 import { TourPageComponent } from './components/tour/tour-page/tour-page.component';
 import { LoginComponent } from './components/admin/forms/login/login.component';
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { AlertComponent } from './components/admin/alert/alert.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { AdminpageComponent } from './components/admin/adminpage/adminpage.component';
 import { PoisComponent } from './components/admin/pois/pois.component';
 import { SidebarComponent } from './components/admin/sidebar/sidebar.component';
+import {JwtInterceptor} from "./helpers/jwt.interceptor";
+import { EditPoiComponent } from './components/admin/edit-poi/edit-poi.component';
+import {AngularEditorModule} from "@kolkov/angular-editor";
 
 @NgModule({
   declarations: [
@@ -44,6 +47,7 @@ import { SidebarComponent } from './components/admin/sidebar/sidebar.component';
     AdminpageComponent,
     PoisComponent,
     SidebarComponent,
+    EditPoiComponent,
 
   ],
   imports: [
@@ -54,9 +58,14 @@ import { SidebarComponent } from './components/admin/sidebar/sidebar.component';
     NgbModule,
     ReactiveFormsModule,
     HttpClientModule,
+    FormsModule,
+    AngularEditorModule
 
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

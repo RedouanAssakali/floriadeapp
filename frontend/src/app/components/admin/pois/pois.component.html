@@ -1,19 +1,67 @@
+<div>
+  <button type="button" (click)="open(content)" class="btn btn-primary">Add new</button>
+</div>
+
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Add new POI</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+
+
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name"
+             required
+             [(ngModel)]="newPoi.name"       name="name">
+    </div>
+    <div class="map" id="map" ></div>
+
+    <div class="form-group">
+      <label for="latitude">Latitude</label>
+      <input type="text"  class="form-control" id="latitude"
+             [(ngModel)]="newPoi.lat"        name="latitude">
+    </div>
+    <div class="form-group">
+      <label for="longitude">longitude</label>
+      <input type="text"  class="form-control" id="longitude"
+         [(ngModel)]="newPoi.long"     name="longitude">
+    </div>
+
+
+
+
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="  addPoi()">Add</button>
+  </div>
+</ng-template>
+
+
+
+
+
 
 <table class="table table-striped">
   <thead>
   <tr>
     <th scope="col">#</th>
     <th scope="col">name</th>
-    <th scope="col">language</th>
-    <th scope="col">title</th>
+
   </tr>
   </thead>
   <tbody>
   <tr *ngFor="let poi of pois; index as i">
     <th scope="row">{{ i + 1 }}</th>
     <td>{{poi.name}}</td>
-    <td>{{ poi.language}}</td>
-    <td>{{ poi.title}}</td>
+   <td><button type="button" class="btn btn-info" (click)="onEdit(poi)">Edit</button>
+   <button type="button" class="btn btn-danger" (click)="onDelete(poi)">Delete</button>
+    </td>
   </tr>
   </tbody>
 </table>
+
+

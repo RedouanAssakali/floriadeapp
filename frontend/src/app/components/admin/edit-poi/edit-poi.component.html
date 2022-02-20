@@ -1,0 +1,102 @@
+<ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+  <li [ngbNavItem]="1">
+
+    <a ngbNavLink>Poi</a>
+    <ng-template ngbNavContent>
+
+
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name"
+               required
+               [(ngModel)]="poi.name"       name="name">
+      </div>
+
+      <div class="form-group">
+        <label for="latitude">Latitude</label>
+        <input type="text"  class="form-control" id="latitude"
+               [(ngModel)]="poi.lat"        name="latitude">
+      </div>
+      <div class="form-group">
+        <label for="longitude">longitude</label>
+        <input type="text"  class="form-control" id="longitude"
+               [(ngModel)]="poi.long"     name="longitude">
+      </div>
+
+    </ng-template>
+
+  </li>
+  <li [ngbNavItem]="2">
+    <a ngbNavLink>Nederlands</a>
+    <ng-template ngbNavContent>
+      <div class="form-group">
+        <label for="titleNl">Title</label>
+        <input type="text" class="form-control" id="titleNl"
+        [(ngModel)]="nlPoiContent.tile"       required
+               name="title">
+      </div>
+
+      <div [formGroup]="form">
+        <angular-editor id="editor1" formControlName="htmlContent1" [(ngModel)]="nlPoiContent.body" [config]="editorService.builEditor()"></angular-editor>
+
+      </div>
+    </ng-template>
+  </li>
+  <li [ngbNavItem]="3">
+    <a ngbNavLink>English</a>
+    <ng-template ngbNavContent>
+      <div class="form-group">
+        <label for="titleEn">Title</label>
+        <input type="text" class="form-control" id="titleEn"
+               [(ngModel)]="enPoiContent.tile"       required
+               name="title">
+      </div>
+
+      <div [formGroup]="form">
+        <angular-editor id="editor2" formControlName="htmlContent1" [(ngModel)]="nlPoiContent.body" [config]="editorService.builEditor()"></angular-editor>
+
+      </div>
+    </ng-template>
+  </li>
+  <li [ngbNavItem]="4">
+    <a ngbNavLink>Deutsch</a>
+    <ng-template ngbNavContent>
+      <div class="form-group">
+        <label for="titleDe">Title</label>
+        <input type="text" class="form-control" id="titleDe"
+               [(ngModel)]="dePoiContent.tile"       required
+               name="title">
+      </div>
+
+      <div [formGroup]="form">
+        <angular-editor id="editor3" formControlName="htmlContent1" [(ngModel)]="dePoiContent.body" [config]="editorService.builEditor()"></angular-editor>
+
+      </div>
+    </ng-template>
+  </li>
+  <li [ngbNavItem]="5">
+    <a ngbNavLink>Francais</a>
+    <ng-template ngbNavContent>
+      <div class="form-group">
+        <label for="titleFr">Title</label>
+        <input type="text" class="form-control" id="titleFr"
+               [(ngModel)]="frPoiContent.tile"       required
+               name="title">
+      </div>
+
+      <div [formGroup]="form">
+        <angular-editor id="editor4" formControlName="htmlContent1" [(ngModel)]="frPoiContent.body" [config]="editorService.builEditor()"></angular-editor>
+
+      </div>
+    </ng-template>
+  </li>
+  <button type="button" (click)="onUpdate()"  class="btn btn-success">Save</button>
+
+</ul>
+
+<div [ngbNavOutlet]="nav" class="mt-2"></div>
+<div   class="map" id="map" ></div>
+
+<pre>Active: {{ active }}</pre>
+
+

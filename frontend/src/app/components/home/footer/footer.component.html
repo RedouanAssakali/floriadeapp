@@ -1,9 +1,19 @@
-<nav class="footer fixed-bottom navbar-light bg-light">
+<nav  *ngIf="!router.url.includes('admin') && router.url !=='/login'"
+      class="footer fixed-bottom navbar-light bg-light">
 
   <ul class="navbar-nav" >
-    <li *ngIf="router.url !=='/admin' && router.url !=='/login' " class="nav-item text-center w-100">
+    <li  class="nav-item text-center w-100">
       <button type="button"   (click)="openScanner()" class="btn btn-success"><fa-icon class="scanIcon"  [icon]="faQrcode"></fa-icon>
       </button>  </li>
   </ul>
+
+  <div *ngIf="lang != null">
+    <select (change)="changeLang($any($event.target).value)">
+      <option [value]="'nl'" [selected]="lang == 'nl' " >Nederlands</option>
+      <option value="en" [selected]="lang == 'en' ">English</option>
+      <option value="fr" [selected]="lang == 'fr' ">Francais</option>
+      <option value="de" [selected]="lang == 'de' ">Deutsch</option>
+    </select>
+  </div>
 
 </nav>

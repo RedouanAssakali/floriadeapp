@@ -7,13 +7,10 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class HomePageComponent implements OnInit {
   @Input()
-  choseLng: boolean = false;
+ lang = localStorage.getItem('lang');
   constructor() { }
 
   ngOnInit(): void {
   }
-choiceLng(){
-   this.choseLng = true;
-   console.log(this.choseLng)
-}
+
 }

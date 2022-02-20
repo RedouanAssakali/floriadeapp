@@ -5,12 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Poi extends Model
+class PoiContent extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name',
-        'lat',
-        'long',
+        'poi_id',
+        'language',
+        'title',
+        'body'
     ];
 }

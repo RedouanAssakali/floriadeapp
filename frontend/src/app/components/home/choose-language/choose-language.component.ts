@@ -9,8 +9,6 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 
 
 export class ChooseLanguageComponent implements OnInit {
-  @Output()
-  lng =  new EventEmitter<boolean>();
 
 
   constructor() { }
@@ -18,9 +16,12 @@ export class ChooseLanguageComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  clickedLng(){
-    this.lng.emit(true);
-    console.log(true);
+  changeLang(lang: any){
+
+    localStorage.setItem('lang',lang);
+    window.location.reload();
   }
+
+
 
 }
