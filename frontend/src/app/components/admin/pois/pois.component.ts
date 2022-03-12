@@ -6,6 +6,7 @@ import {PoiService} from "../../../services/poi.service";
 import {NgbActiveModal, NgbModal, NgbModalConfig} from "@ng-bootstrap/ng-bootstrap";
 import mapboxgl from "mapbox-gl";
 import {ActivatedRoute, Router} from "@angular/router";
+import {PoiContent} from "../../../models/poiContent";
 
 @Component({
   selector: 'app-pois',
@@ -31,20 +32,17 @@ export class PoisComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-
   }
 
   async getAllPois() {
     await this.poiService.getPois().subscribe(
       (data) => {
-        // @ts-ignore
+
         this.pois = data;
         console.log(data);
       },
       (error) => console.log("Error: " + error.status + " - " + error.error)
     );
-
   }
 
   onEdit(poi: Poi) {
@@ -60,6 +58,7 @@ export class PoisComponent implements OnInit {
   }
   addPoi() {
     this.poiService.createPoi(this.newPoi);
+    this.poiService.createPoiContent(new PoiContent())
     this.modalService.dismissAll()
     this.getAllPois();
   }
@@ -115,4 +114,29 @@ export class PoisComponent implements OnInit {
   }
 
 
+  addContent(poi: Poi) {
+    let nlContent = new PoiContent();
+    let deContent = new PoiContent();
+    let frContent = new PoiContent();
+    let enContent = new PoiContent();
+
+    nlContent.poiId = poi.id;
+    deContent.poiId = poi.id;
+    frContent.poiId = poi.id;
+    enContent.poiId = poi.id;
+
+
+    nlContent.lang = "nl";
+    deContent.lang = "de";
+    frContent.lang = "fr";
+    enContent.lang = "en";
+
+    this.poiService.createPoiContent(nlContent);
+    this.poiService.createPoiContent(deContent);
+    this.poiService.createPoiContent(frContent);
+    this.poiService.createPoiContent(enContent);
+
+    poi.hasContent = true;
+    this.poiService.updatePoi(poi)
+  }
 }

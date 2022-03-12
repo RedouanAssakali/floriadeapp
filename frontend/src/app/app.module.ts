@@ -27,6 +27,9 @@ import { SidebarComponent } from './components/admin/sidebar/sidebar.component';
 import {JwtInterceptor} from "./helpers/jwt.interceptor";
 import { EditPoiComponent } from './components/admin/edit-poi/edit-poi.component';
 import {AngularEditorModule} from "@kolkov/angular-editor";
+import { TourComponent } from './components/admin/tour/tour.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import {DragDropModule} from "@angular/cdk/drag-drop";
 
 @NgModule({
   declarations: [
@@ -48,20 +51,23 @@ import {AngularEditorModule} from "@kolkov/angular-editor";
     PoisComponent,
     SidebarComponent,
     EditPoiComponent,
+    TourComponent,
 
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FontAwesomeModule,
-    ZXingScannerModule,
-    NgbModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    FormsModule,
-    AngularEditorModule
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FontAwesomeModule,
+        ZXingScannerModule,
+        NgbModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        FormsModule,
+        AngularEditorModule,
+        NoopAnimationsModule,
+        DragDropModule
 
-  ],
+    ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
 

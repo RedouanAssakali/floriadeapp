@@ -7,10 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Poi extends Model
 {
+    public function tour(){
+        return $this->belongsToMany(Tour::class,'poi_tour',
+            'poi_id','tour_id')
+            ->withTimestamps()
+            ->withPivot(['seq']);
+    }
     use HasFactory;
     protected $fillable = [
         'name',
         'lat',
         'long',
+        'hasContent'
     ];
 }

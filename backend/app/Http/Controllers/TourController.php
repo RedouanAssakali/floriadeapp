@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Poi;
+
+use App\Models\Tour;
 use Illuminate\Http\Request;
 
-class PoiController extends Controller
+class TourController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,9 +14,12 @@ class PoiController extends Controller
      */
     public function index()
     {
-        return Poi::all();
 
-    }
+        return  Tour::find(1)->pois()->orderBy('seq')->get();
+
+
+           }
+
 
     /**
      * Store a newly created resource in storage.
@@ -27,10 +31,15 @@ class PoiController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'lat'=> 'required',
-            'long'=> 'required',
+            'description'=> 'required',
         ]);
-        return Poi::create($request->all());
+
+
+     return   $tour = Tour::create($request->validated());
+        $tour->pois()->attach($request->input('poi_id'));
+
+
+
     }
 
     /**
@@ -41,9 +50,7 @@ class PoiController extends Controller
      */
     public function show($id)
     {
-        return Poi::find($id);
-        
-
+        //
     }
 
     /**
@@ -55,20 +62,17 @@ class PoiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $poi = Poi::find($id);
-        $poi->update($request->all());
-        return $poi;
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return int
+     * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        return Poi::destroy($id);
+        //
     }
-
 }

@@ -2,7 +2,7 @@ export class PoiContent{
   id: number;
   poiId: number
   lang: string;
-  tile: string;
+  title: string;
   body: string;
 
   constructor() {

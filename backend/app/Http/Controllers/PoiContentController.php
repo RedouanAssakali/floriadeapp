@@ -48,6 +48,8 @@ class PoiContentController extends Controller
             ->get();
     }
 
+
+
     /**
      * Update the specified resource in storage.
      *
@@ -55,9 +57,12 @@ class PoiContentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $poi_id,$lang)
     {
-        //
+        $poiContent = PoiContent::where('poi_id','=',$poi_id)
+            ->where('language','=',$lang)
+            ->update($request->all());
+        return $poiContent;
     }
 
     /**

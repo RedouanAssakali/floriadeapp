@@ -9,10 +9,11 @@ import {AdminpageComponent} from "./components/admin/adminpage/adminpage.compone
 import {AuthGuard} from "./helpers/auth.guard";
 import {PoisComponent} from "./components/admin/pois/pois.component";
 import {EditPoiComponent} from "./components/admin/edit-poi/edit-poi.component";
+import {TourComponent} from "./components/admin/tour/tour.component";
 
 const routes: Routes = [
   {path: '', component: HomePageComponent},
-  {path: 'poi', component: PoiPageComponent},
+  {path: 'poi/:id', component: PoiPageComponent},
   {path: 'scanner', component: QrScannerComponent},
   {path: 'tour', component: TourPageComponent},
 
@@ -22,6 +23,8 @@ const routes: Routes = [
     children: [
       {path: 'poi', component: PoisComponent},
       {path: 'poi/edit/:id', component:EditPoiComponent},
+      {path: 'tour', component: TourComponent},
+
     ]
 
   }

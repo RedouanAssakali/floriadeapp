@@ -11,7 +11,6 @@ import {PoiContent} from "../models/poiContent";
   providedIn: 'root'
 })
 export class PoiService {
-  private pois: Poi[];
   private poi: Poi;
 
   constructor(private router: Router, private http: HttpClient
@@ -20,12 +19,12 @@ export class PoiService {
 
   getPois(): Observable<Poi[]> {
     return this.http.get<Poi[]>(`${environment.apiUrl}/pois`).pipe(
-      map((restPois: any[]) => {
+      map((restPois: Poi[]) => {
         const pois: Poi[] = [];
         for (const poi of restPois) {
           pois.push(poi);
         }
-        this.pois = pois;
+
         return pois;
       }));
   }
@@ -71,7 +70,7 @@ export class PoiService {
 
   updatePoi(poi: Poi) {
     const observable = this.http.put(`${environment.apiUrl}/pois/${poi.id}`,
-      {name: poi.name, lat: poi.lat, long: poi.long},
+      {name: poi.name, lat: poi.lat, long: poi.long, hasContent: poi.hasContent},
     ).pipe(share());
 
     observable.subscribe((data) => {
@@ -85,7 +84,20 @@ export class PoiService {
   }
 
 
+  createPoiContent(poiContent: PoiContent) {
+    const observable = this.http.post(`${environment.apiUrl}/poicontent`,
+      {poi_id: poiContent.poiId, language: poiContent.lang, title: "Title works!",body: "Body Works!"},
+    ).pipe(share());
 
+    observable.subscribe((data) => {
+        console.log(data);
+      },
+      (err) => {
+        console.log('creation error', err);
+      });
+
+    return observable;
+  }
 
   getPoiContent(poiId: number, lang:string): Observable<any[]> {
     return this.http.get<any[]>(`${environment.apiUrl}/poicontent/${poiId}/${lang}`).pipe(
@@ -94,6 +106,22 @@ export class PoiService {
         return restPoi;
       }));
   }
+
+  updatePoiContent(poiContent: PoiContent) {
+    const observable = this.http.put(`${environment.apiUrl}/poicontent/${poiContent.poiId}/${poiContent.lang}`,
+      {poi_id: poiContent.poiId, language: poiContent.lang, title: poiContent.title,body: poiContent.body},
+    ).pipe(share());
+
+    observable.subscribe((data) => {
+        console.log(data);
+      },
+      (err) => {
+        console.log('creation error', err);
+      });
+
+    return observable;
+  }
+
 
 
 

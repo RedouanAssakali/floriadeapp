@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PoiContentController;
+use App\Http\Controllers\TourController;
 use App\Http\Controllers\PoiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 /**
  * Routes for Poi's
  */
+//Route::get('/tour', [TourController::class, 'index']);
 
 //Public routes
 Route::get('/pois', [PoiController::class, 'index']);
@@ -31,6 +33,8 @@ Route::get('/poicontent/{poi_id}/{lang}',[PoiContentController::class, 'show']);
 
 //Protected routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::post('/tour', [TourController::class, 'store']);
+
     //pois
     Route::post('/pois',[PoiController::class, 'store']);
     Route::put('/pois/{id}',[PoiController::class, 'update']);
@@ -38,8 +42,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     //poi content
         Route::post('/poicontent',[PoiContentController::class, 'store']);
-    Route::put('/poicontent/{id}',[PoiController::class, 'update']);
-    Route::delete('/pois/{id}',[PoiController::class, 'destroy']);
+    Route::put('/poicontent/{id}/{lang}',[PoiContentController::class, 'update']);
+    Route::delete('/pois/{id}/{lang}',[PoiContentController::class, 'destroy']);
 
 
 

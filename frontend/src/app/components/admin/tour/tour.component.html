@@ -1,0 +1,49 @@
+<ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+  <li [ngbNavItem]="1">
+
+    <a ngbNavLink>sequence</a>
+    <ng-template ngbNavContent>
+      <div class="example-container">
+        <h2>in tour</h2>
+
+        <div
+          cdkDropList
+          #todoList="cdkDropList"
+          [cdkDropListData]="inTour"
+          [cdkDropListConnectedTo]="[doneList]"
+          class="example-list"
+          (cdkDropListDropped)="drop($event)">
+          <div class="example-box" *ngFor="let item of inTour" cdkDrag>{{item.name}}</div>
+        </div>
+      </div>
+
+      <div class="example-container">
+        <h2>not in tour</h2>
+
+        <div
+          cdkDropList
+          #doneList="cdkDropList"
+          [cdkDropListData]="notTour"
+          [cdkDropListConnectedTo]="[todoList]"
+          class="example-list"
+          (cdkDropListDropped)="drop($event)">
+          <div class="example-box" *ngFor="let item of notTour" cdkDrag>{{item.name}}</div>
+        </div>
+      </div>
+
+    </ng-template>
+
+  </li>
+  <li [ngbNavItem]="2">
+    <a ngbNavLink>not</a>
+    <ng-template ngbNavContent>
+
+    </ng-template>
+  </li>
+
+</ul>
+
+
+
+
+<div [ngbNavOutlet]="nav" class="mt-2"></div>

@@ -32,10 +32,12 @@ export class EditPoiComponent implements OnInit {
   }
 
 
+
   ngOnInit(): void {
     this.getId();
     this.getPoi();
     this.map();
+
 
     this.nlPoiContent = this.getContentByLang("nl");
     this.enPoiContent = this.getContentByLang("en");
@@ -58,7 +60,7 @@ export class EditPoiComponent implements OnInit {
       content.id = data[0].id;
       content.poiId = data[0].poi_id;
       content.lang = data[0].language;
-      content.tile = data[0].title;
+      content.title = data[0].title;
       content.body = data[0].body;
     })
 
@@ -82,13 +84,17 @@ export class EditPoiComponent implements OnInit {
       this.poi.name = data.name
       this.poi.lat = data.lat
       this.poi.long = data.long
-
+      this.poi.hasContent = data.hasContent
     });
 
   }
 
   onUpdate(){
     this.poiService.updatePoi(this.poi);
+    this.poiService.updatePoiContent(this.nlPoiContent);
+    this.poiService.updatePoiContent(this.enPoiContent);
+    this.poiService.updatePoiContent(this.dePoiContent);
+    this.poiService.updatePoiContent(this.frPoiContent);
   }
 
 
