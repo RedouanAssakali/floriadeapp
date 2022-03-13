@@ -81,6 +81,9 @@ class PoiController extends Controller
             $path = $poi->imgpath;
             if ($request->file('imgpath')) {
                 $path = Storage::put('public/files', $request->file('imgpath'));
+                if (! empty($poi->imgpath)) {
+                    Storage::delete($poi->imgpath);
+                }
             }
         }
         $poi->update([

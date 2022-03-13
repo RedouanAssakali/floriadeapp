@@ -88,6 +88,9 @@ class PoiContentController extends Controller
             $path = $poiContent->audiopath;
             if ($request->file('audiopath')) {
                 $path = Storage::put('public/files', $request->file('audiopath'));
+                if (! empty($poiContent->audiopath)) {
+                    Storage::delete($poiContent->audiopath);
+                }
             }
         }
         $poiContent->update([
