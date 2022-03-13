@@ -31,6 +31,7 @@ Route::get('/pois/{id}',[PoiController::class, 'show']);
 Route::get('/poicontent',[PoiContentController::class, 'index']);
 Route::get('/poicontent/{poi_id}/{lang}',[PoiContentController::class, 'show']);
 Route::get('/tour/{id}',[TourController::class, 'show']);
+Route::get('/tours',[TourController::class, 'showAll']);
 
 //Protected routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
