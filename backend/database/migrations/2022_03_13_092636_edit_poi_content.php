@@ -13,7 +13,7 @@ return new class() extends Migration {
     public function up()
     {
         Schema::table('poi_content', function (Blueprint $table) {
-            $table->string('audiofile')->after('body');
+            $table->string('audiopath')->after('body');
         });
     }
 
@@ -24,6 +24,6 @@ return new class() extends Migration {
      */
     public function down()
     {
-        Schema::dropColumns('poi_content', 'audiofile');
+        Schema::dropColumns('poi_content', 'audiopath');
     }
 };

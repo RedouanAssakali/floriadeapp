@@ -49,7 +49,7 @@ class TourController extends Controller
 
         // $tour->pois()->attach([$val['id']=>['seq' => $val['seq']]]);
 
-        return 'OK';
+        return $tour;
     }
 
     /**
@@ -102,7 +102,7 @@ class TourController extends Controller
         }
         $tour->pois()->sync($arr);
 
-        return 'OK';
+        return $tour;
     }
 
     /**

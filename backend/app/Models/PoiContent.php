@@ -12,6 +12,7 @@ class PoiContent extends Model
         'poi_id',
         'language',
         'title',
-        'body'
+        'body',
+        'audiopath'
     ];
 }
