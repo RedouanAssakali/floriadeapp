@@ -30,6 +30,10 @@ import {AngularEditorModule} from "@kolkov/angular-editor";
 import { TourComponent } from './components/admin/tour/tour.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import {DragDropModule} from "@angular/cdk/drag-drop";
+import {ButtonModule} from "primeng/button";
+import {NgxQRCodeModule} from "@techiediaries/ngx-qrcode";
+
+
 
 @NgModule({
   declarations: [
@@ -65,7 +69,10 @@ import {DragDropModule} from "@angular/cdk/drag-drop";
         FormsModule,
         AngularEditorModule,
         NoopAnimationsModule,
-        DragDropModule
+        DragDropModule,
+        ButtonModule,
+        NgxQRCodeModule
+
 
     ],
   providers: [

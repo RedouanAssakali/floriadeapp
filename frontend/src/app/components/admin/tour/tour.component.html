@@ -1,5 +1,29 @@
 <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+
   <li [ngbNavItem]="1">
+    <a ngbNavLink>Tours</a>
+    <ng-template ngbNavContent>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">name</th>
+          <th scope="col">Pois</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let tour of tours; index as i">
+          <th scope="row">{{ i + 1 }}</th>
+          <td>{{tour.name}}</td>
+          <td>{{tour.pois.length}}</td>
+
+        </tr>
+        </tbody>
+      </table>
+    </ng-template>
+  </li>
+  <li [ngbNavItem]="2">
 
     <a ngbNavLink>sequence</a>
     <ng-template ngbNavContent>

@@ -7,6 +7,7 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {EditorService} from "../../../services/editor.service";
 import mapboxgl from "mapbox-gl";
 import {PoiContent} from "../../../models/poiContent";
+import {NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels} from "@techiediaries/ngx-qrcode";
 
 @Component({
   selector: 'app-edit-poi',
@@ -21,22 +22,24 @@ export class EditPoiComponent implements OnInit {
   active = 1;
   poi: Poi = new Poi();
   pois: Poi[];
+  poiContents: PoiContent[];
   nlPoiContent: PoiContent;
   enPoiContent: PoiContent;
   frPoiContent: PoiContent;
   dePoiContent: PoiContent;
-
+  public elementType = NgxQrcodeElementTypes.URL;
+  public correctionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
+  public value: string;
+  href: any;
 
   constructor(private route: ActivatedRoute, private poiService: PoiService, public editorService: EditorService) {
 
   }
 
 
-
   ngOnInit(): void {
     this.getId();
     this.getPoi();
-    this.map();
 
 
     this.nlPoiContent = this.getContentByLang("nl");
@@ -44,7 +47,12 @@ export class EditPoiComponent implements OnInit {
     this.dePoiContent = this.getContentByLang("de");
     this.frPoiContent = this.getContentByLang("fr");
 
-    console.log(this.nlPoiContent);
+    this.poiContents = [this.nlPoiContent, this.enPoiContent, this.dePoiContent, this.frPoiContent];
+
+    this.map();
+
+    this.value = 'http://localhost:4200/poi/' + this.poi.id;
+
   }
 
   htmlContent: any;
@@ -53,9 +61,9 @@ export class EditPoiComponent implements OnInit {
   });
 
 
-  getContentByLang(lang: string):PoiContent{
-    let content:PoiContent = new PoiContent();
-    this.poiService.getPoiContent(this.poi.id,lang).subscribe(data =>{
+  getContentByLang(lang: string): PoiContent {
+    let content: PoiContent = new PoiContent();
+    this.poiService.getPoiContent(this.poi.id, lang).subscribe(data => {
       console.log(data[0])
       content.id = data[0].id;
       content.poiId = data[0].poi_id;
@@ -70,7 +78,7 @@ export class EditPoiComponent implements OnInit {
 
   getId() {
     this.sub = this.route.params.subscribe(params => {
-      this.poi.id  = +params['id']; // (+) converts string 'id' to a number
+      this.poi.id = +params['id']; // (+) converts string 'id' to a number
       // In a real app: dispatch action to load the details here.
     });
   }
@@ -78,7 +86,7 @@ export class EditPoiComponent implements OnInit {
 
   getPoi() {
 
-    this.poiService.getPoiById( this.poi.id).subscribe(data => {
+    this.poiService.getPoiById(this.poi.id).subscribe(data => {
 
       this.poi.id = data.id
       this.poi.name = data.name
@@ -89,14 +97,13 @@ export class EditPoiComponent implements OnInit {
 
   }
 
-  onUpdate(){
+  onUpdate() {
     this.poiService.updatePoi(this.poi);
     this.poiService.updatePoiContent(this.nlPoiContent);
     this.poiService.updatePoiContent(this.enPoiContent);
     this.poiService.updatePoiContent(this.dePoiContent);
     this.poiService.updatePoiContent(this.frPoiContent);
   }
-
 
 
   map() {
@@ -136,14 +143,15 @@ export class EditPoiComponent implements OnInit {
 
     // Get LNG & LAT
     map.on('click', (e) => {
-      this.poi.long= e.lngLat.lng;
+      this.poi.long = e.lngLat.lng;
       this.poi.lat = e.lngLat.lat;
     });
 
   }
 
 
+  downloadImage() {
+    this.href = document.getElementsByTagName('img')[0].src;
 
-
-
+  }
 }

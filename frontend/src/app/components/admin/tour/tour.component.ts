@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {PoiService} from "../../../services/poi.service";
 import {Poi} from "../../../models/poi";
+import {TourService} from "../../../services/tour.service";
+import {Tour} from "../../../models/Tour";
 
 @Component({
   selector: 'app-tour',
@@ -10,62 +12,59 @@ import {Poi} from "../../../models/poi";
 })
 export class TourComponent implements OnInit {
   active = 1;
-  pois:  Poi[] ;
-  inTour : Poi[] = [];
+  pois: Poi[];
+  inTour: Poi[] = [];
 
   notTour: Poi[] = [];
 
 
-  constructor(private poiService: PoiService) {
-    // this.getAllPois();
+  tours: Tour[];
+
+  constructor(private poiService: PoiService, private tourService: TourService) {
   }
 
   ngOnInit(): void {
+    this.getAllPois();
+    this.getAllTours();
 
- this.poiService.getPois().subscribe(
+  }
+
+
+  getAllPois() {
+    this.poiService.getPois().subscribe(
       (data) => {
 
         for (const poi of data) {
-          if (poi.is_tour == true){
+          if (poi.is_tour == true) {
             this.inTour.push(poi);
-          }else{
+          } else {
             this.notTour.push(poi)
           }
         }
         console.log(this.inTour);
         return data;
       });
-    // this.sequence();
-console.log(this.pois)
+
   }
 
+  getAllTours(){
+    this.tourService.getAllTours().subscribe(
+      (data) => {
+        this.tours = data
+        console.log(this.tours)
+      });
 
+  }
 
-  //
-  //  getAllPois():Poi[] {
-  //   let dataP;
-  //    this.poiService.getPois().subscribe(
-  //     (data) => {
-  //       // @ts-ignore
-  //       dataP = data;
-  //       console.log(data);
-  //       return data
-  //     },
-  //     (error) => console.log("Error: " + error.status + " - " + error.error)
-  //   );
-  //   return dataP;
-  //
-  // }
-
-  sequence(){
+  sequence() {
     console.log(this.pois)
     for (const poi of this.pois) {
-      if (poi.is_tour == true){
+      if (poi.is_tour == true) {
         this.inTour.push(poi);
-      }else{
+      } else {
         this.notTour.push(poi)
       }
-  console.log(poi)
+      console.log(poi)
     }
   }
 
