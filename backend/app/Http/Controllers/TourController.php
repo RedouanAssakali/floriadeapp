@@ -32,7 +32,7 @@ class TourController extends Controller
             'name' => 'required',
             'description' => 'required',
             'pois.*.id' => 'required|integer',
-            'pois.*.seq' => 'required|integer'
+            'pois.*.seq' => 'required|integer',
         ]);
         // var_dump($request->pois); die;
         $tour = Tour::create($data);
@@ -40,7 +40,6 @@ class TourController extends Controller
         // $tour->description = $request->description;
         // var_dump($request->pois); die;
         // $tour->save();
-        $arr = [];
         foreach ($request->pois as $val) {
             $poi = Poi::find($val['id']);
             $tour->pois()->attach($poi, [
@@ -71,16 +70,10 @@ class TourController extends Controller
 
     public function showAll()
     {
-        $ret = [];
-        $tours = Tour::orderBy('name')->get();
-        foreach ($tours as $tour) {
-            $arr['tour'] = $tour;
-            foreach ($tour->pois as $pois) {
-                $arr[] = $pois;
-            }
-            $ret[] = $arr;
-        }
-        return $ret;
+        return Tour::orderBy('name')->get()->each(function($tour){
+            $tour->pois;
+        });
+
     }
 
     /**
