@@ -11,8 +11,9 @@ class PoiContent extends Model
     protected $fillable = [
         'poi_id',
         'language',
+        'type',
         'title',
         'body',
-        'audiopath'
+        'filepath'
     ];
 }
