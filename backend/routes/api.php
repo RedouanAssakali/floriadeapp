@@ -40,12 +40,12 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     //pois
     Route::post('/pois',[PoiController::class, 'store']);
-    Route::put('/pois/{id}',[PoiController::class, 'update']);
+    Route::post('/pois/{id}',[PoiController::class, 'update']);
     Route::delete('/pois/{id}',[PoiController::class, 'destroy']);
 
     //poi content
-        Route::post('/poicontent',[PoiContentController::class, 'store']);
-    Route::put('/poicontent/{id}/{lang}',[PoiContentController::class, 'update']);
+    Route::post('/poicontent',[PoiContentController::class, 'store']);
+    Route::post('/poicontent/{id}/{lang}',[PoiContentController::class, 'update']);
     Route::delete('/pois/{id}/{lang}',[PoiContentController::class, 'destroy']);
 
 

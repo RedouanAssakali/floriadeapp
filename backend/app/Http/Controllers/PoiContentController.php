@@ -79,14 +79,21 @@ class PoiContentController extends Controller
             'audiopath' => 'file|mimes:mp3'
         ]);
         $poiContent = PoiContent::where('poi_id', '=', $poi_id)->where('language', '=', $lang);
-        $audiopath = '';
-        if ($request->file('audiopath')) {
-            $audiopath = Storage::put('public/files', $request->file('audiopath'));
+        if (! empty($request->delete_file)) {
+            if (! empty($poiContent->audiopath)) {
+                Storage::delete($poiContent->audiopath);
+            }
+            $path = '';
+        } else {
+            $path = $poiContent->audiopath;
+            if ($request->file('audiopath')) {
+                $path = Storage::put('public/files', $request->file('audiopath'));
+            }
         }
         $poiContent->update([
             'title' => $request->title,
             'body' => $request->body,
-            'audiopath' => $audiopath
+            'audiopath' => $path
         ]);
         
         return $poiContent;
