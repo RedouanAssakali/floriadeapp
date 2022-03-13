@@ -1,10 +1,11 @@
 <?php
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class() extends Migration {
-
+return new class extends Migration
+{
     /**
      * Run the migrations.
      *
@@ -12,11 +13,11 @@ return new class() extends Migration {
      */
     public function up()
     {
-        Schema::table('poi_contents', function (Blueprint $table) {
-            $table->string('audiopath')->after('body');
+        Schema::table('pois', function (Blueprint $table) {
+            $table->string('imgpath')->after('hasContent');
         });
     }
-
+    
     /**
      * Reverse the migrations.
      *
@@ -24,6 +25,6 @@ return new class() extends Migration {
      */
     public function down()
     {
-        Schema::dropColumns('poi_contents', 'audiopath');
+        Schema::dropColumns('pois', 'imgpath');
     }
 };

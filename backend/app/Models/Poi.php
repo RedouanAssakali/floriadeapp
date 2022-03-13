@@ -17,6 +17,7 @@ class Poi extends Model
         'name',
         'lat',
         'long',
-        'hasContent'
+        'hasContent',
+        'imgpath'
     ];
 }
