@@ -25,7 +25,6 @@ export class PoiContentComponent implements OnInit {
 
     this.getId();
     this.poiContent = this.getContent(this.lang)
-    console.log(this.poi.id)
 
   }
 
@@ -34,13 +33,16 @@ export class PoiContentComponent implements OnInit {
 
   getContent(lang: string):PoiContent{
     let content:PoiContent = new PoiContent();
-    this.poiService.getPoiContent(7,lang).subscribe(data =>{
+    this.poiService.getPoiContent(this.poi.id,lang).subscribe(data=>{
       console.log(data[0])
       content.id = data[0].id;
       content.poiId = data[0].poi_id;
       content.lang = data[0].language;
       content.title = data[0].title;
       content.body = data[0].body;
+      content.audiopath = 'http://localhost:8000'+data[0].audiopath;
+
+      console.log(content.audiopath)
     })
 
     return content;

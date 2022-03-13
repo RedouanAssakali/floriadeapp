@@ -7,6 +7,7 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {EditorService} from "../../../services/editor.service";
 import mapboxgl from "mapbox-gl";
 import {PoiContent} from "../../../models/poiContent";
+import {NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels} from "@techiediaries/ngx-qrcode";
 
 @Component({
   selector: 'app-edit-poi',
@@ -18,25 +19,28 @@ export class EditPoiComponent implements OnInit {
 
   id: number;
   private sub: any;
+  audioSrc: string | ArrayBuffer ;
   active = 1;
   poi: Poi = new Poi();
   pois: Poi[];
+  poiContents: PoiContent[];
   nlPoiContent: PoiContent;
   enPoiContent: PoiContent;
   frPoiContent: PoiContent;
   dePoiContent: PoiContent;
-
-
+  public elementType = NgxQrcodeElementTypes.URL;
+  public correctionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
+  public value: string;
+  href: any;
+  filedata:any
   constructor(private route: ActivatedRoute, private poiService: PoiService, public editorService: EditorService) {
 
   }
 
 
-
   ngOnInit(): void {
     this.getId();
     this.getPoi();
-    this.map();
 
 
     this.nlPoiContent = this.getContentByLang("nl");
@@ -44,7 +48,12 @@ export class EditPoiComponent implements OnInit {
     this.dePoiContent = this.getContentByLang("de");
     this.frPoiContent = this.getContentByLang("fr");
 
-    console.log(this.nlPoiContent);
+    this.poiContents = [this.nlPoiContent, this.enPoiContent, this.dePoiContent, this.frPoiContent];
+
+    this.map();
+
+    this.value = 'http://localhost:4200/poi/' + this.poi.id;
+
   }
 
   htmlContent: any;
@@ -53,9 +62,20 @@ export class EditPoiComponent implements OnInit {
   });
 
 
-  getContentByLang(lang: string):PoiContent{
-    let content:PoiContent = new PoiContent();
-    this.poiService.getPoiContent(this.poi.id,lang).subscribe(data =>{
+
+  readURL(event: any): void {
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
+
+      const reader = new FileReader();
+      reader.onload = e => this.audioSrc = reader.result;
+
+      reader.readAsDataURL(file);
+    }
+  }
+  getContentByLang(lang: string): PoiContent {
+    let content: PoiContent = new PoiContent();
+    this.poiService.getPoiContent(this.poi.id, lang).subscribe(data => {
       console.log(data[0])
       content.id = data[0].id;
       content.poiId = data[0].poi_id;
@@ -70,7 +90,7 @@ export class EditPoiComponent implements OnInit {
 
   getId() {
     this.sub = this.route.params.subscribe(params => {
-      this.poi.id  = +params['id']; // (+) converts string 'id' to a number
+      this.poi.id = +params['id']; // (+) converts string 'id' to a number
       // In a real app: dispatch action to load the details here.
     });
   }
@@ -78,7 +98,7 @@ export class EditPoiComponent implements OnInit {
 
   getPoi() {
 
-    this.poiService.getPoiById( this.poi.id).subscribe(data => {
+    this.poiService.getPoiById(this.poi.id).subscribe(data => {
 
       this.poi.id = data.id
       this.poi.name = data.name
@@ -89,14 +109,34 @@ export class EditPoiComponent implements OnInit {
 
   }
 
-  onUpdate(){
-    this.poiService.updatePoi(this.poi);
-    this.poiService.updatePoiContent(this.nlPoiContent);
-    this.poiService.updatePoiContent(this.enPoiContent);
-    this.poiService.updatePoiContent(this.dePoiContent);
-    this.poiService.updatePoiContent(this.frPoiContent);
-  }
+  onUpdate() {
 
+    // @ts-ignore
+    const fileNl =document.querySelector("[name=audioFiles]").files;
+    // const fileNl = document.getElementById("audioFiles"+this.nlPoiContent.lang).file;
+    // @ts-ignore
+    // const fileEn = document.getElementById("audioFiles"+this.enPoiContent.lang).file;
+    // // @ts-ignore
+    // const fileFr = document.getElementById("audioFiles"+this.frPoiContent.lang).file;
+    // // @ts-ignore
+    // const fileDe = document.getElementById("audioFiles"+this.dePoiContent.lang).file;
+    const formDataNl = new FormData();
+    // const formDataEn = new FormData();
+    // const formDataFr = new FormData();
+    // const formDataDe = new FormData();
+
+      formDataNl.append("audiopath", fileNl);
+    // formDataEn.append("file", fileEn);
+    // formDataFr.append("file", fileFr);
+    // formDataDe.append("file", fileDe);
+console.log(fileNl)
+
+    this.poiService.updatePoi(this.poi);
+    this.poiService.updatePoiContent(this.nlPoiContent,formDataNl);
+    // this.poiService.updatePoiContent(this.enPoiContent,formDataEn);
+    // this.poiService.updatePoiContent(this.dePoiContent,formDataDe);
+    // this.poiService.updatePoiContent(this.frPoiContent,formDataFr);
+  }
 
 
   map() {
@@ -136,14 +176,10 @@ export class EditPoiComponent implements OnInit {
 
     // Get LNG & LAT
     map.on('click', (e) => {
-      this.poi.long= e.lngLat.lng;
+      this.poi.long = e.lngLat.lng;
       this.poi.lat = e.lngLat.lat;
     });
 
   }
-
-
-
-
 
 }

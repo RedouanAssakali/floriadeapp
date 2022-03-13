@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {faStepForward, faPlay, faPause, IconDefinition} from "@fortawesome/free-solid-svg-icons";
 import {ClassPropertyName} from "@angular/compiler-cli/src/ngtsc/metadata";
 @Component({
@@ -7,6 +7,10 @@ import {ClassPropertyName} from "@angular/compiler-cli/src/ngtsc/metadata";
   styleUrls: ['./single-audio-player.component.css']
 })
 export class SingleAudioPlayerComponent implements OnInit {
+
+  @Input()
+  audioUrl: string;
+
   faPlay = faPlay;
   faPause = faPause;
   playOrPause: IconDefinition = faPlay;
@@ -21,7 +25,7 @@ export class SingleAudioPlayerComponent implements OnInit {
   cover = document.getElementById('cover') as HTMLImageElement;
   currTime = document.querySelector('#currTime');
   durTime = document.querySelector('#durTime');
-  audioUrl: string;
+
   coverUrl: string;
 // Song titles
   songs = ['ukulele'];

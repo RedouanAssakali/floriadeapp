@@ -1,6 +1,7 @@
 .footer{
   align-items: center;
 color: #1a202c;
+
 }
 .scanIcon{
   font-size: 40px;
@@ -14,13 +15,25 @@ color: #1a202c;
 
 }
 
+.btn-primary{
+  position: center;
+  margin-top: 10px;
+  border: 30px;
+  /*background-color: rgb(233,96,54);*/
+  background-color: rgb(143,209,83);
+
+}
+
 .bg-light{
-  left: 10%;
-  right: 10%;
   height: 80px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-  margin-bottom: 20px;
   border-radius: 20px;
-  max-width: 80%;
-  background-color: #0384e5 !important;
+  width: 100%;
+  background-color: rgba(3, 132, 229, 0.65) !important;
+
+}
+
+.langSelector{
+
+  width: 20%;
 }

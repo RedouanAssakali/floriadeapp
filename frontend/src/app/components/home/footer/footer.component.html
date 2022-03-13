@@ -1,9 +1,12 @@
+
 <nav  *ngIf="!router.url.includes('admin') && router.url !=='/login'"
       class="footer fixed-bottom navbar-light bg-light">
 
+
+
   <ul class="navbar-nav" >
     <li  class="nav-item text-center w-100">
-      <button type="button"   (click)="openScanner()" class="btn btn-success"><fa-icon class="scanIcon"  [icon]="faQrcode"></fa-icon>
+      <button type="button"   (click)="openScanner()" class="btn btn-primary btn-rounded btn-icon rounded-circle "><fa-icon class="scanIcon"  [icon]="faQrcode"></fa-icon>
       </button>  </li>
   </ul>
 

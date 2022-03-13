@@ -1,7 +1,15 @@
 h1{
-  margin-top: 10px;
+
   margin-bottom: 40px;
-  text-align: center;
+  text-align: left;
+  margin-left: 5%;
+  color: rgb(249,209,83);
+}
+small{
+  text-align: left;
+  margin-left: 5%;
+  /*color: rgb(233,96,54);*/
+  color: rgb(143,209,83);
 }
 .audioPlayer{
 top: 40px;

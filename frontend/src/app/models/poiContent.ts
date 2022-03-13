@@ -4,6 +4,7 @@ export class PoiContent{
   lang: string;
   title: string;
   body: string;
+  audiopath: string;
 
   constructor() {
   }

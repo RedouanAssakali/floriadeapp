@@ -1,5 +1,5 @@
 <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
-  <li [ngbNavItem]="1">
+  <li [ngbNavItem]="0">
 
     <a ngbNavLink>Poi</a>
     <ng-template ngbNavContent>
@@ -22,80 +22,52 @@
         <input type="text"  class="form-control" id="longitude"
                [(ngModel)]="poi.long"     name="longitude">
       </div>
+      <div class="form-group">
+        <label for="poiImage">POI Image</label>
+        <input type="file"  class="form-control" id="poiImage"
+               name="poiImage">
+      </div>
+
+      <div class="container">
+        <ngx-qrcode
+          [elementType]="elementType" [errorCorrectionLevel]="correctionLevel"
+        [value]="value"
+        cssClass="poiQRCode"></ngx-qrcode>
+      </div>
 
     </ng-template>
 
   </li>
-  <li [ngbNavItem]="2">
-    <a ngbNavLink>Nederlands</a>
+  <li *ngFor="let poiContent of poiContents; let i =  index" [ngbNavItem]="i+1">
+    <a ngbNavLink>{{poiContent.lang}}</a>
     <ng-template ngbNavContent>
       <div class="form-group">
-        <label for="titleNl">Title</label>
-        <input type="text" class="form-control" id="titleNl"
-               [(ngModel)]="nlPoiContent.title" required
+        <label for="title{{i}}">Title</label>
+        <input type="text" class="form-control" id="title{{i}}"
+               [(ngModel)]="poiContent.title" required
                name="title">
       </div>
 
       <div [formGroup]="form">
-        <angular-editor id="editor1" formControlName="htmlContent1" [(ngModel)]="nlPoiContent.body" [config]="editorService.builEditor()"></angular-editor>
+        <angular-editor id="editor{{i}}" formControlName="htmlContent1" [(ngModel)]="poiContent.body" [config]="editorService.builEditor()"></angular-editor>
 
       </div>
-    </ng-template>
-  </li>
-  <li [ngbNavItem]="3">
-    <a ngbNavLink>English</a>
-    <ng-template ngbNavContent>
       <div class="form-group">
-        <label for="titleEn">Title</label>
-        <input type="text" class="form-control" id="titleEn"
-               [(ngModel)]="enPoiContent.title" required
-               name="title">
-      </div>
-
-      <div [formGroup]="form">
-        <angular-editor id="editor2" formControlName="htmlContent1" [(ngModel)]="nlPoiContent.body" [config]="editorService.builEditor()"></angular-editor>
+        <label for="formAudio{{poiContent.lang}}">Audio File</label>
+        <form id="formAudio{{poiContent.lang}}" method="post" enctype="multipart/form-data">
+          <input type="file" id="fileInputAudio{{poiContent.lang}}" (change)="readURL($event)" name="audioFiles">
+        </form>
 
       </div>
     </ng-template>
   </li>
-  <li [ngbNavItem]="4">
-    <a ngbNavLink>Deutsch</a>
-    <ng-template ngbNavContent>
-      <div class="form-group">
-        <label for="titleDe">Title</label>
-        <input type="text" class="form-control" id="titleDe"
-               [(ngModel)]="dePoiContent.title" required
-               name="title">
-      </div>
 
-      <div [formGroup]="form">
-        <angular-editor id="editor3" formControlName="htmlContent1" [(ngModel)]="dePoiContent.body" [config]="editorService.builEditor()"></angular-editor>
-
-      </div>
-    </ng-template>
-  </li>
-  <li [ngbNavItem]="5">
-    <a ngbNavLink>Francais</a>
-    <ng-template ngbNavContent>
-      <div class="form-group">
-        <label for="titleFr">Title</label>
-        <input type="text" class="form-control" id="titleFr"
-               [(ngModel)]="frPoiContent.title" required
-               name="title">
-      </div>
-
-      <div [formGroup]="form">
-        <angular-editor id="editor4" formControlName="htmlContent1" [(ngModel)]="frPoiContent.body" [config]="editorService.builEditor()"></angular-editor>
-
-      </div>
-    </ng-template>
-  </li>
   <button type="button" (click)="onUpdate()"  class="btn btn-success">Save</button>
 
 </ul>
 
 <div [ngbNavOutlet]="nav" class="mt-2"></div>
-<div   class="map" id="map" ></div>
+<div id="map"  ></div>
 
 <pre>Active: {{ active }}</pre>
 
