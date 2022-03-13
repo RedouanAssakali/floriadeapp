@@ -45,7 +45,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     //poi content
     Route::post('/poicontent',[PoiContentController::class, 'store']);
-    Route::post('/poicontent/{id}/{lang}',[PoiContentController::class, 'update']);
+    Route::post('/poicontent/{id}/',[PoiContentController::class, 'update']);
     Route::delete('/pois/{id}/{lang}',[PoiContentController::class, 'destroy']);
 
 

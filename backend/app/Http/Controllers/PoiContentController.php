@@ -71,14 +71,14 @@ class PoiContentController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $poi_id, $lang)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'title' => 'required',
             'body' => 'required',
             'audiopath' => 'file|mimes:mp3'
         ]);
-        $poiContent = PoiContent::where('poi_id', '=', $poi_id)->where('language', '=', $lang);
+        $poiContent = PoiContent::find($id);
         if (! empty($request->delete_file)) {
             if (! empty($poiContent->audiopath)) {
                 Storage::delete($poiContent->audiopath);
@@ -98,7 +98,7 @@ class PoiContentController extends Controller
             'body' => $request->body,
             'audiopath' => $path
         ]);
-        
+
         return $poiContent;
     }
 
