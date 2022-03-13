@@ -69,7 +69,7 @@ export class PoiService {
 
 
   updatePoi(poi: Poi) {
-    const observable = this.http.put(`${environment.apiUrl}/pois/${poi.id}`,
+    const observable = this.http.post(`${environment.apiUrl}/pois/${poi.id}`,
       {name: poi.name, lat: poi.lat, long: poi.long, hasContent: poi.hasContent},
     ).pipe(share());
 
@@ -100,6 +100,7 @@ export class PoiService {
   }
 
   getPoiContent(poiId: number, lang:string): Observable<any[]> {
+
     return this.http.get<any[]>(`${environment.apiUrl}/poicontent/${poiId}/${lang}`).pipe(
       map((restPoi: any[]) => {
         console.log(restPoi[0])
@@ -107,9 +108,10 @@ export class PoiService {
       }));
   }
 
-  updatePoiContent(poiContent: PoiContent) {
-    const observable = this.http.put(`${environment.apiUrl}/poicontent/${poiContent.poiId}/${poiContent.lang}`,
-      {poi_id: poiContent.poiId, language: poiContent.lang, title: poiContent.title,body: poiContent.body},
+  updatePoiContent(poiContent: PoiContent, audioFile: FormData) {
+
+    const observable = this.http.post(`${environment.apiUrl}/poicontent/${poiContent.id}}`,
+      {poi_id: poiContent.poiId, language: poiContent.lang, title: poiContent.title,body: poiContent.body,audioFile}
     ).pipe(share());
 
     observable.subscribe((data) => {

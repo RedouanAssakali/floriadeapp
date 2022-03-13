@@ -19,6 +19,7 @@ export class EditPoiComponent implements OnInit {
 
   id: number;
   private sub: any;
+  audioSrc: string | ArrayBuffer ;
   active = 1;
   poi: Poi = new Poi();
   pois: Poi[];
@@ -31,7 +32,7 @@ export class EditPoiComponent implements OnInit {
   public correctionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
   public value: string;
   href: any;
-
+  filedata:any
   constructor(private route: ActivatedRoute, private poiService: PoiService, public editorService: EditorService) {
 
   }
@@ -61,6 +62,17 @@ export class EditPoiComponent implements OnInit {
   });
 
 
+
+  readURL(event: any): void {
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
+
+      const reader = new FileReader();
+      reader.onload = e => this.audioSrc = reader.result;
+
+      reader.readAsDataURL(file);
+    }
+  }
   getContentByLang(lang: string): PoiContent {
     let content: PoiContent = new PoiContent();
     this.poiService.getPoiContent(this.poi.id, lang).subscribe(data => {
@@ -98,11 +110,32 @@ export class EditPoiComponent implements OnInit {
   }
 
   onUpdate() {
+
+    // @ts-ignore
+    const fileNl =document.querySelector("[name=audioFiles]").files;
+    // const fileNl = document.getElementById("audioFiles"+this.nlPoiContent.lang).file;
+    // @ts-ignore
+    // const fileEn = document.getElementById("audioFiles"+this.enPoiContent.lang).file;
+    // // @ts-ignore
+    // const fileFr = document.getElementById("audioFiles"+this.frPoiContent.lang).file;
+    // // @ts-ignore
+    // const fileDe = document.getElementById("audioFiles"+this.dePoiContent.lang).file;
+    const formDataNl = new FormData();
+    // const formDataEn = new FormData();
+    // const formDataFr = new FormData();
+    // const formDataDe = new FormData();
+
+      formDataNl.append("audiopath", fileNl);
+    // formDataEn.append("file", fileEn);
+    // formDataFr.append("file", fileFr);
+    // formDataDe.append("file", fileDe);
+console.log(fileNl)
+
     this.poiService.updatePoi(this.poi);
-    this.poiService.updatePoiContent(this.nlPoiContent);
-    this.poiService.updatePoiContent(this.enPoiContent);
-    this.poiService.updatePoiContent(this.dePoiContent);
-    this.poiService.updatePoiContent(this.frPoiContent);
+    this.poiService.updatePoiContent(this.nlPoiContent,formDataNl);
+    // this.poiService.updatePoiContent(this.enPoiContent,formDataEn);
+    // this.poiService.updatePoiContent(this.dePoiContent,formDataDe);
+    // this.poiService.updatePoiContent(this.frPoiContent,formDataFr);
   }
 
 
@@ -149,9 +182,4 @@ export class EditPoiComponent implements OnInit {
 
   }
 
-
-  downloadImage() {
-    this.href = document.getElementsByTagName('img')[0].src;
-
-  }
 }

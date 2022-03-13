@@ -35,7 +35,6 @@
         cssClass="poiQRCode"></ngx-qrcode>
       </div>
 
-      <a [href]="href"  (click)="downloadImage()" download>Download Image</a>
     </ng-template>
 
   </li>
@@ -54,9 +53,11 @@
 
       </div>
       <div class="form-group">
-        <label for="audioFile">Audio File</label>
-        <input type="file"  class="form-control" id="audioFile"
-               name="audioFile">
+        <label for="formAudio{{poiContent.lang}}">Audio File</label>
+        <form id="formAudio{{poiContent.lang}}" method="post" enctype="multipart/form-data">
+          <input type="file" id="fileInputAudio{{poiContent.lang}}" (change)="readURL($event)" name="audioFiles">
+        </form>
+
       </div>
     </ng-template>
   </li>

@@ -19,7 +19,9 @@ color: #1a202c;
   position: center;
   margin-top: 10px;
   border: 30px;
-  background-color: rgb(233,96,54);
+  /*background-color: rgb(233,96,54);*/
+  background-color: rgb(143,209,83);
+
 }
 
 .bg-light{
@@ -27,7 +29,8 @@ color: #1a202c;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
   border-radius: 20px;
   width: 100%;
-  background-color: #0384e5 !important;
+  background-color: rgba(3, 132, 229, 0.65) !important;
+
 }
 
 .langSelector{

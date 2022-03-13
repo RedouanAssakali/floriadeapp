@@ -40,6 +40,9 @@ export class PoiContentComponent implements OnInit {
       content.lang = data[0].language;
       content.title = data[0].title;
       content.body = data[0].body;
+      content.audiopath = 'http://localhost:8000'+data[0].audiopath;
+
+      console.log(content.audiopath)
     })
 
     return content;

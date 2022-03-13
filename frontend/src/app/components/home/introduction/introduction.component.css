@@ -8,7 +8,8 @@ h1{
 small{
   text-align: left;
   margin-left: 5%;
-  color: rgb(233,96,54);
+  /*color: rgb(233,96,54);*/
+  color: rgb(143,209,83);
 }
 .audioPlayer{
 top: 40px;

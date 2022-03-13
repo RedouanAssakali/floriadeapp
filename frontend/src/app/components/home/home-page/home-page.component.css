@@ -34,6 +34,25 @@ margin-right:10% }
    opacity: 0.9;
  }
 
+.btn-primary{
+  font-size: 18px;
+  margin-top: 10px;
+margin-right: 0;
+  margin-left: 0;
+  border-radius: 50px;
+  border: none;
+  max-width: 40px;
+  background-color: rgb(233,96,54);
+}
 
 
+.card-body{
+  margin-top: 60%;
+  margin-left:10%;
+}
 
+.gardens{
+  text-align: left;
+  margin-left: 5%;
+  color: rgb(249,209,83);
+}
