@@ -8,8 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Poi extends Model
 {
     public function tour(){
-        return $this->belongsToMany(Tour::class,'poi_tour',
-            'poi_id','tour_id')
+        return $this->belongsToMany(Tour::class,'poi_tour')
             ->withTimestamps()
             ->withPivot(['seq']);
     }

@@ -30,10 +30,12 @@ Route::get('/pois', [PoiController::class, 'index']);
 Route::get('/pois/{id}',[PoiController::class, 'show']);
 Route::get('/poicontent',[PoiContentController::class, 'index']);
 Route::get('/poicontent/{poi_id}/{lang}',[PoiContentController::class, 'show']);
+Route::get('/tour/{id}',[TourController::class, 'show']);
 
 //Protected routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/tour', [TourController::class, 'store']);
+    Route::put('/tour/{id}',[TourController::class, 'update']);
 
     //pois
     Route::post('/pois',[PoiController::class, 'store']);

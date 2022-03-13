@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Poi;
 use App\Models\Tour;
 use Illuminate\Http\Request;
 
@@ -16,9 +17,7 @@ class TourController extends Controller
     {
 
         return  Tour::find(1)->pois()->orderBy('seq')->get();
-
-
-           }
+    }
 
 
     /**
@@ -29,17 +28,27 @@ class TourController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $data = $request->validate([
             'name' => 'required',
-            'description'=> 'required',
+            'description' => 'required',
+            'pois.*.id' => 'required|integer',
+            'pois.*.seq' => 'required|integer',
         ]);
+        //var_dump($request->pois); die;
+        $tour = Tour::create($data);
+        //$tour->name = $request->name;
+        //$tour->description = $request->description;
+        //var_dump($request->pois); die;
+        //$tour->save();
+        $arr = [];
+        foreach ($request->pois as $val) {
+            $poi = Poi::find($val['id']);
+            $tour->pois()->attach($poi, ['seq' => $val['seq']]);
+        }
 
+        //$tour->pois()->attach([$val['id']=>['seq' => $val['seq']]]);
 
-     return   $tour = Tour::create($request->validated());
-        $tour->pois()->attach($request->input('poi_id'));
-
-
-
+        return 'OK';
     }
 
     /**
@@ -50,7 +59,12 @@ class TourController extends Controller
      */
     public function show($id)
     {
-        //
+        $tour = Tour::find($id);
+        $arr['tour'] = $tour;
+        foreach ($tour->pois as $pois) {
+            $arr[] = $pois;
+        }
+        return $arr;
     }
 
     /**
@@ -62,7 +76,22 @@ class TourController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'pois.*.id' => 'required|integer',
+            'pois.*.seq' => 'required|integer',
+        ]);
+        //var_dump($request->pois); die;
+        $tour = Tour::find($id);
+        $tour->update($data);
+        $arr = [];
+        foreach ($request->pois as $val) {
+            $arr[$val['id']] = ['seq' => $val['seq']];
+        }
+        $tour->pois()->sync($arr);
+
+        return 'OK';
     }
 
     /**
