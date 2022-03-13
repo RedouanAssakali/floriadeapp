@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
 
-        Schema::create('poi_content', function (Blueprint $table) {
+        Schema::create('poi_contents', function (Blueprint $table) {
             $table->id();
             $table->foreignId('poi_id')->constrained('pois')
                 ->onUpdate('cascade')
