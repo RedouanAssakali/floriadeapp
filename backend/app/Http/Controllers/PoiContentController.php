@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Storage;
 class PoiContentController extends Controller
 {
 
+    const TYPE_ENUM_PLANT = 'plant';
+
+    const TYPE_ENUM_POI = 'poi';
+
     /**
      * Display a listing of the resource.
      *
@@ -32,21 +36,47 @@ class PoiContentController extends Controller
             'language' => 'required',
             'title' => 'required',
             'body' => 'required',
-            'audiopath' => 'file|mimes:mp3'
+            'filepath' => 'file|mimes:mp3'
         ]);
-        $audiopath = '';
-        if ($request->file('audiopath')) {
-            $audiopath = Storage::put('public/files', $request->file('audiopath'));
+        $filepath = '';
+        if ($request->file('filepath')) {
+            $filepath = Storage::put('public/files', $request->file('filepath'));
         }
         return PoiContent::create([
             'poi_id' => $request->poi_id,
             'language' => $request->language,
             'title' => $request->title,
             'body' => $request->body,
-            'audiopath' => $audiopath
+            'filepath' => $filepath
         ]);
     }
-
+    /**
+     * storePlant a newly created resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storePlant(Request $request)
+    {
+        $request->validate([
+            'poi_id' => 'required',
+            'language' => 'required',
+            'type' => 'required|in:TYPE_ENUM_PLANT',
+            'title' => 'required',
+            'filepath' => 'file|mimes:jpeg,png'
+        ]);
+        $filepath = '';
+        if ($request->file('filepath')) {
+            $filepath = Storage::put('public/files', $request->file('filepath'));
+        }
+        return PoiContent::create([
+            'poi_id' => $request->poi_id,
+            'title' => $request->title,
+            'body' => $request->body,
+            'filepath' => $filepath
+        ]);
+    }
+    
     /**
      * Display the specified resource.
      *
@@ -56,10 +86,23 @@ class PoiContentController extends Controller
     public function show(int $poi_id, string $lang)
     {
         return PoiContent::where('poi_id', '=', $poi_id)->where('language', '=', $lang)
+            ->where('type', '=', self::TYPE_ENUM_POI)
             ->get()
             ->each(function ($content) {
-            if (! empty($content->audiopath)) {
-                $content->audiopath = Storage::url($content->audiopath);
+            if (! empty($content->filepath)) {
+                $content->filepath = Storage::url($content->filepath);
+            }
+        });
+    }
+
+    public function showPlants(int $poi_id, string $lang)
+    {
+        return PoiContent::where('poi_id', '=', $poi_id)->where('language', '=', $lang)
+            ->where('type', '=', self::TYPE_ENUM_PLANT)
+            ->get()
+            ->each(function ($content) {
+            if (! empty($content->filepath)) {
+                $content->filepath = Storage::url($content->filepath);
             }
         });
     }
@@ -76,29 +119,64 @@ class PoiContentController extends Controller
         $request->validate([
             'title' => 'required',
             'body' => 'required',
-            'audiopath' => 'file|mimes:mp3'
+            'filepath' => 'file|mimes:mp3'
         ]);
         $poiContent = PoiContent::find($id);
         if (! empty($request->delete_file)) {
-            if (! empty($poiContent->audiopath)) {
-                Storage::delete($poiContent->audiopath);
+            if (! empty($poiContent->filepath)) {
+                Storage::delete($poiContent->filepath);
             }
             $path = '';
         } else {
-            $path = $poiContent->audiopath;
-            if ($request->file('audiopath')) {
-                $path = Storage::put('public/files', $request->file('audiopath'));
-                if (! empty($poiContent->audiopath)) {
-                    Storage::delete($poiContent->audiopath);
+            $path = $poiContent->filepath;
+            if ($request->file('filepath')) {
+                $path = Storage::put('public/files', $request->file('filepath'));
+                if (! empty($poiContent->filepath)) {
+                    Storage::delete($poiContent->filepath);
                 }
             }
         }
         $poiContent->update([
             'title' => $request->title,
             'body' => $request->body,
-            'audiopath' => $path
+            'filepath' => $path
         ]);
 
+        return $poiContent;
+    }
+
+    /**
+     * updatePlant the specified resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updatePlant(Request $request, $id)
+    {
+        $request->validate([
+            'title' => 'required',
+            'filepath' => 'file|mimes:jpeg,png'
+        ]);
+        $poiContent = PoiContent::find($id);
+        if (! empty($request->delete_file)) {
+            if (! empty($poiContent->filepath)) {
+                Storage::delete($poiContent->filepath);
+            }
+            $path = '';
+        } else {
+            $path = $poiContent->filepath;
+            if ($request->file('filepath')) {
+                $path = Storage::put('public/files', $request->file('filepath'));
+                if (! empty($poiContent->filepath)) {
+                    Storage::delete($poiContent->filepath);
+                }
+            }
+        }
+        $poiContent->update([
+            'title' => $request->title,
+            'filepath' => $path
+        ]);
         return $poiContent;
     }
 

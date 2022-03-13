@@ -32,6 +32,7 @@ Route::get('/poicontent',[PoiContentController::class, 'index']);
 Route::get('/poicontent/{poi_id}/{lang}',[PoiContentController::class, 'show']);
 Route::get('/tour/{id}',[TourController::class, 'show']);
 Route::get('/tours',[TourController::class, 'showAll']);
+Route::get('/poiplant/{poi_id}/{lang}',[PoiContentController::class, 'showPlants']);
 
 //Protected routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
@@ -47,8 +48,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/poicontent',[PoiContentController::class, 'store']);
     Route::post('/poicontent/{id}/',[PoiContentController::class, 'update']);
     Route::delete('/pois/{id}/{lang}',[PoiContentController::class, 'destroy']);
-
-
+    
+    //poi plant
+    Route::post('/poiplant',[PoiContentController::class, 'storePlant']);
+    Route::post('/poiplant/{id}/',[PoiContentController::class, 'updatePlant']);
 
 });
 
