@@ -31,24 +31,8 @@ class TourController extends Controller
         $data = $request->validate([
             'name' => 'required',
             'description' => 'required',
-            'pois.*.id' => 'required|integer',
-            'pois.*.seq' => 'required|integer',
         ]);
-        // var_dump($request->pois); die;
         $tour = Tour::create($data);
-        // $tour->name = $request->name;
-        // $tour->description = $request->description;
-        // var_dump($request->pois); die;
-        // $tour->save();
-        foreach ($request->pois as $val) {
-            $poi = Poi::find($val['id']);
-            $tour->pois()->attach($poi, [
-                'seq' => $val['seq']
-            ]);
-        }
-
-        // $tour->pois()->attach([$val['id']=>['seq' => $val['seq']]]);
-
         return $tour;
     }
 
