@@ -68,7 +68,27 @@ class PoiController extends Controller
         $request->validate([
             'name' => 'required',
             'lat' => 'required',
-            'long' => 'required',
+            'long' => 'required'
+        ]);
+        $poi = Poi::find($id);
+        $poi->update([
+            'name' => $request->name,
+            'lat' => $request->lat,
+            'long' => $request->long
+        ]);
+        return $poi;
+    }
+
+    /**
+     * updateFile the specified resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updateFile(Request $request, $id)
+    {
+        $request->validate([
             'imgpath' => 'file|mimes:jpeg,png'
         ]);
         $poi = Poi::find($id);
@@ -87,9 +107,6 @@ class PoiController extends Controller
             }
         }
         $poi->update([
-            'name' => $request->name,
-            'lat' => $request->lat,
-            'long' => $request->long,
             'imgpath' => $path
         ]);
         return $poi;

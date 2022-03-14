@@ -119,6 +119,24 @@ class PoiContentController extends Controller
         $request->validate([
             'title' => 'required',
             'body' => 'required',
+        ]);
+        $poiContent = PoiContent::find($id);
+        $poiContent->update([
+            'title' => $request->title,
+            'body' => $request->body,
+        ]);
+        return $poiContent;
+    }
+    /**
+     * updateFile the specified resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updateFile(Request $request, $id)
+    {
+        $request->validate([
             'filepath' => 'file|mimes:mp3'
         ]);
         $poiContent = PoiContent::find($id);
@@ -137,14 +155,11 @@ class PoiContentController extends Controller
             }
         }
         $poiContent->update([
-            'title' => $request->title,
-            'body' => $request->body,
             'filepath' => $path
         ]);
-
         return $poiContent;
     }
-
+    
     /**
      * updatePlant the specified resource in storage.
      *
@@ -156,26 +171,10 @@ class PoiContentController extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'filepath' => 'file|mimes:jpeg,png'
         ]);
         $poiContent = PoiContent::find($id);
-        if (! empty($request->delete_file)) {
-            if (! empty($poiContent->filepath)) {
-                Storage::delete($poiContent->filepath);
-            }
-            $path = '';
-        } else {
-            $path = $poiContent->filepath;
-            if ($request->file('filepath')) {
-                $path = Storage::put('public/files', $request->file('filepath'));
-                if (! empty($poiContent->filepath)) {
-                    Storage::delete($poiContent->filepath);
-                }
-            }
-        }
         $poiContent->update([
             'title' => $request->title,
-            'filepath' => $path
         ]);
         return $poiContent;
     }

@@ -42,11 +42,13 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     //pois
     Route::post('/pois',[PoiController::class, 'store']);
     Route::post('/pois/{id}',[PoiController::class, 'update']);
+    Route::post('/poisfile/{id}',[PoiController::class, 'updateFile']);
     Route::delete('/pois/{id}',[PoiController::class, 'destroy']);
 
     //poi content
     Route::post('/poicontent',[PoiContentController::class, 'store']);
     Route::post('/poicontent/{id}/',[PoiContentController::class, 'update']);
+    Route::post('/poicontentfile/{id}/',[PoiContentController::class, 'updateFile']);
     Route::delete('/pois/{id}/{lang}',[PoiContentController::class, 'destroy']);
     
     //poi plant
