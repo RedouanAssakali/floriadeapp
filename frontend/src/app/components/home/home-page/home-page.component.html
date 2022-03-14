@@ -30,6 +30,22 @@
     </div>
 
 
+<h1 class="gardens">Check this out</h1>
+    <div class="container-fluid">
+      <div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 pt-2">
+        <div *ngFor="let blog of blogs" class="card"
+             style='width: 18rem; height: 200px; background-image: url({{blog.image}})' >
+          <p>{{blog.image}}</p>
+          <button type="button"  class="btn btn-primary btn-rounded btn-icon"><fa-icon class="scanIcon"  [icon]="faArrowCircleRight"></fa-icon>
+          </button>
+          <div class="card-body">
+            <h1>{{blog.title}}</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
 
 
   <div class="tours">

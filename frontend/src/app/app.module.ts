@@ -32,6 +32,8 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import {DragDropModule} from "@angular/cdk/drag-drop";
 import {ButtonModule} from "primeng/button";
 import {NgxQRCodeModule} from "@techiediaries/ngx-qrcode";
+import { PlantsComponent } from './components/admin/plants/plants.component';
+import {ApiService} from "./services/wp-api.service";
 
 
 
@@ -56,6 +58,7 @@ import {NgxQRCodeModule} from "@techiediaries/ngx-qrcode";
     SidebarComponent,
     EditPoiComponent,
     TourComponent,
+    PlantsComponent,
 
   ],
     imports: [
@@ -76,7 +79,7 @@ import {NgxQRCodeModule} from "@techiediaries/ngx-qrcode";
 
     ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }, ApiService
 
   ],
   bootstrap: [AppComponent]

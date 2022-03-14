@@ -10,6 +10,7 @@ import {AuthGuard} from "./helpers/auth.guard";
 import {PoisComponent} from "./components/admin/pois/pois.component";
 import {EditPoiComponent} from "./components/admin/edit-poi/edit-poi.component";
 import {TourComponent} from "./components/admin/tour/tour.component";
+import {PlantsComponent} from "./components/admin/plants/plants.component";
 
 const routes: Routes = [
   {path: '', component: HomePageComponent},
@@ -24,6 +25,7 @@ const routes: Routes = [
       {path: 'poi', component: PoisComponent},
       {path: 'poi/edit/:id', component:EditPoiComponent},
       {path: 'tour', component: TourComponent},
+      {path: 'plants', component: PlantsComponent},
 
     ]
 
