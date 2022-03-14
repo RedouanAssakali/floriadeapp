@@ -38,7 +38,8 @@ Route::get('/poiplant/{poi_id}/{lang}',[PoiContentController::class, 'showPlants
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/tour', [TourController::class, 'store']);
     Route::put('/tour/{id}',[TourController::class, 'update']);
-
+    Route::delete('/tour/{id}',[TourController::class, 'destroy']);
+    
     //pois
     Route::post('/pois',[PoiController::class, 'store']);
     Route::post('/pois/{id}',[PoiController::class, 'update']);
