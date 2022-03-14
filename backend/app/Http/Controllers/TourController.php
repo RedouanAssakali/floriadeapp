@@ -97,6 +97,6 @@ class TourController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return Tour::destroy($id);
     }
 }
